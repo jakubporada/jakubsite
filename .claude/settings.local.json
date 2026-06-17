@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"home: %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"about: %{http_code}\\\\n\" http://localhost:3000/about)",
+      "Bash(curl -s -o /dev/null -w \"projects: %{http_code}\\\\n\" http://localhost:3000/projects)",
+      "Bash(curl -s -o /dev/null -w \"blog: %{http_code}\\\\n\" http://localhost:3000/blog)",
+      "Bash(curl -s -o /dev/null -w \"post: %{http_code}\\\\n\" http://localhost:3000/blog/welcome)",
+      "Bash(curl -s -o /dev/null -w \"post2: %{http_code}\\\\n\" http://localhost:3000/blog/sample-ctf-writeup)",
+      "Bash(curl -s -o /dev/null -w \"resume: %{http_code}\\\\n\" http://localhost:3000/Jakub_Porada_Resume.pdf)",
+      "Bash(curl -s -I http://localhost:3000/Jakub_Porada_Resume.pdf)"
+    ]
+  }
+}

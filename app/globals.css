@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* highlight.js theme for code blocks in blog posts */
+@import "highlight.js/styles/github-dark.css";
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink text-zinc-200 antialiased;
+  background-image:
+    radial-gradient(60rem 40rem at 80% -10%, rgba(134, 31, 65, 0.18), transparent 60%),
+    radial-gradient(50rem 40rem at 0% 10%, rgba(232, 119, 34, 0.08), transparent 55%);
+  background-attachment: fixed;
+}
+
+/* Subtle technical grid overlay */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Maroon -> orange gradient text */
+.text-gradient {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(120deg, #a83258 0%, #E87722 100%);
+}
+
+/* Thin uppercase mono label */
+.eyebrow {
+  @apply font-mono text-xs uppercase tracking-[0.25em] text-burnt;
+}
+
+/* Glow ring used on cards / buttons */
+.glow-border {
+  box-shadow: 0 0 0 1px rgba(134, 31, 65, 0.35), 0 0 40px -12px rgba(134, 31, 65, 0.5);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0c;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a32;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #861F41;
+}
+
+/* ---------- Blog article (markdown) typography ---------- */
+.prose-article {
+  @apply text-zinc-300 leading-relaxed;
+}
+.prose-article h2 {
+  @apply font-display text-2xl font-bold text-white mt-12 mb-4 scroll-mt-24;
+}
+.prose-article h3 {
+  @apply font-display text-xl font-semibold text-white mt-8 mb-3 scroll-mt-24;
+}
+.prose-article p {
+  @apply my-4;
+}
+.prose-article a {
+  @apply text-burnt underline underline-offset-4 hover:text-burnt-light;
+}
+.prose-article ul {
+  @apply my-4 list-disc pl-6 space-y-2;
+}
+.prose-article ol {
+  @apply my-4 list-decimal pl-6 space-y-2;
+}
+.prose-article strong {
+  @apply text-white font-semibold;
+}
+.prose-article blockquote {
+  @apply border-l-2 border-maroon pl-4 italic text-zinc-400 my-6;
+}
+.prose-article code:not(pre code) {
+  @apply font-mono text-sm text-burnt-light bg-ink-700 px-1.5 py-0.5 rounded;
+}
+.prose-article pre {
+  @apply my-6 overflow-x-auto rounded-xl border border-white/10 bg-ink-800 p-4 text-sm;
+}
+.prose-article pre code {
+  @apply font-mono;
+}
+.prose-article table {
+  @apply my-6 w-full border-collapse text-sm;
+}
+.prose-article th,
+.prose-article td {
+  @apply border border-white/10 px-3 py-2 text-left;
+}
