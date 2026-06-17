@@ -8,7 +8,10 @@
       "Bash(curl -s -o /dev/null -w \"post: %{http_code}\\\\n\" http://localhost:3000/blog/welcome)",
       "Bash(curl -s -o /dev/null -w \"post2: %{http_code}\\\\n\" http://localhost:3000/blog/sample-ctf-writeup)",
       "Bash(curl -s -o /dev/null -w \"resume: %{http_code}\\\\n\" http://localhost:3000/Jakub_Porada_Resume.pdf)",
-      "Bash(curl -s -I http://localhost:3000/Jakub_Porada_Resume.pdf)"
+      "Bash(curl -s -I http://localhost:3000/Jakub_Porada_Resume.pdf)",
+      "mcp__visualize__read_me",
+      "WebSearch",
+      "mcp__visualize__show_widget"
     ]
   }
 }

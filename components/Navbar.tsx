@@ -29,7 +29,6 @@ export function Navbar() {
           <span className="text-maroon-light group-hover:text-burnt transition-colors">
             porada
           </span>
-          <span className="animate-blink text-burnt">_</span>
         </Link>
 
         {/* Desktop nav */}
