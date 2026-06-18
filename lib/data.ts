@@ -18,12 +18,13 @@ export const profile = {
     "Certified cybersecurity student with hands-on experience in network infrastructure, endpoint security, reverse engineering, and security operations. Skilled in Windows/Linux administration, Cisco networking, traffic analysis, and production system deployment. Platinum CyberPatriot Semi-Finalist and Top 15 National Cyber League competitor with experience securing enterprise systems and analyzing live network traffic.",
 };
 
-// Headline stats spotlighted on the home page
-export const stats: { value: string; label: string }[] = [
-  { value: "Top 15", label: "National Cyber League" },
-  { value: "Platinum", label: "CyberPatriot Semi-Finalist" },
-  { value: "8+", label: "Industry Certifications" },
-  { value: "2", label: "Security Internships" },
+// Headline stats spotlighted on the home page.
+// tone: "accent" = orange, "chip" = maroon pill, "plain" = cream.
+export const stats: { value: string; label: string; tone: "accent" | "chip" | "plain" }[] = [
+  { value: "Top 15", label: "National Cyber League", tone: "accent" },
+  { value: "Platinum", label: "CyberPatriot Semi-Finalist", tone: "plain" },
+  { value: "8+", label: "Certifications", tone: "chip" },
+  { value: "2", label: "Internships", tone: "plain" },
 ];
 
 export type Experience = {

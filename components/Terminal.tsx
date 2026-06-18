@@ -46,8 +46,8 @@ const FS: DirNode = d({
 });
 
 const BOOT = [
-  { t: `${profile.name} // interactive shell`, c: "text-white" },
-  { t: `type 'help' to get started. yes — this terminal actually works.`, c: "text-zinc-500" },
+  { t: `${profile.name} // interactive shell`, c: "text-cream" },
+  { t: `type 'help' to get started. yes — this terminal actually works.`, c: "text-stone-500" },
 ];
 
 type Line = { text: string; cls?: string };
@@ -85,7 +85,7 @@ export function Terminal() {
 
   function run(raw: string) {
     const cmd = raw.trim();
-    print([{ text: `${cwd} $ ${cmd}`, cls: "text-zinc-300" }]);
+    print([{ text: `${cwd} $ ${cmd}`, cls: "text-stone-300" }]);
     if (!cmd) return;
 
     const [name, ...args] = cmd.split(/\s+/);
@@ -106,7 +106,7 @@ export function Terminal() {
           { text: "  banner          show the banner" },
           { text: "  clear           clear the screen" },
           { text: "" },
-          { text: "  there's a hidden flag somewhere. happy hunting.", cls: "text-zinc-500" },
+          { text: "  there's a hidden flag somewhere. happy hunting.", cls: "text-stone-500" },
         ]);
         break;
 
@@ -148,17 +148,17 @@ export function Terminal() {
         const target = args[0];
         const node = target ? dir.children[target] : undefined;
         if (node && node.type === "file")
-          print(node.content.split("\n").map((t) => ({ text: t, cls: "text-zinc-300" })));
+          print(node.content.split("\n").map((t) => ({ text: t, cls: "text-stone-300" })));
         else print([{ text: `cat: ${target ?? ""}: no such file`, cls: "text-red-400" }]);
         break;
       }
 
       case "pwd":
-        print([{ text: cwd.replace("~", "/home/jakub"), cls: "text-zinc-300" }]);
+        print([{ text: cwd.replace("~", "/home/jakub"), cls: "text-stone-300" }]);
         break;
 
       case "whoami":
-        print([{ text: "visitor — but you can hire jakub :)", cls: "text-zinc-300" }]);
+        print([{ text: "visitor — but you can hire jakub :)", cls: "text-stone-300" }]);
         break;
 
       case "open":
@@ -183,7 +183,7 @@ export function Terminal() {
           print([
             { text: "███████████████████████████████████", cls: "text-burnt" },
             { text: "  ✔ FLAG ACCEPTED — nicely done.", cls: "text-green-400" },
-            { text: "  you clearly poke at things. let's talk:", cls: "text-zinc-300" },
+            { text: "  you clearly poke at things. let's talk:", cls: "text-stone-300" },
             { text: `  ${profile.email}`, cls: "text-burnt" },
             { text: "███████████████████████████████████", cls: "text-burnt" },
           ]);
@@ -253,14 +253,14 @@ export function Terminal() {
         <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
         <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
         <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-        <span className="ml-3 text-xs text-zinc-500">
+        <span className="ml-3 text-xs text-stone-500">
           visitor@jakubporada: {cwd} {solved && "· 🚩"}
         </span>
       </div>
 
       <div ref={scrollRef} className="h-[300px] overflow-y-auto p-5">
         {lines.map((l, i) => (
-          <p key={i} className={`whitespace-pre-wrap break-words ${l.cls ?? "text-zinc-300"}`}>
+          <p key={i} className={`whitespace-pre-wrap break-words ${l.cls ?? "text-stone-300"}`}>
             {l.text || " "}
           </p>
         ))}
@@ -275,7 +275,7 @@ export function Terminal() {
             spellCheck={false}
             autoComplete="off"
             aria-label="terminal input"
-            className="w-full flex-1 border-none bg-transparent text-white caret-burnt outline-none"
+            className="w-full flex-1 border-none bg-transparent text-cream caret-burnt outline-none"
           />
         </div>
       </div>

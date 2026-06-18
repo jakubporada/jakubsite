@@ -20,13 +20,13 @@ export default function AboutPage() {
     <div className="mx-auto max-w-4xl px-5 py-16">
       {/* Intro */}
       <p className="eyebrow mb-3">// about me</p>
-      <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">
+      <h1 className="font-display text-4xl font-bold text-cream sm:text-5xl">
         The full <span className="text-gradient">story</span>.
       </h1>
-      <div className="mt-6 space-y-4 text-lg leading-relaxed text-zinc-300">
+      <div className="mt-6 space-y-4 text-lg leading-relaxed text-stone-300">
         <p>{profile.summary}</p>
         <p>
-          I&apos;m headed to <span className="text-white">Virginia Tech</span> for Computer
+          I&apos;m headed to <span className="text-cream">Virginia Tech</span> for Computer
           Engineering, but I&apos;ve spent the last few years going deep on security through
           dual-enrollment coursework, certifications, competitions, and two internships. What
           I enjoy most is the low-level stuff — reverse engineering binaries, reading network
@@ -34,7 +34,7 @@ export default function AboutPage() {
         </p>
         <p>
           Outside of security, I compete as a{" "}
-          <span className="text-white">Division I athlete</span> — the discipline and time
+          <span className="text-cream">Division I athlete</span> — the discipline and time
           management that takes shows up in how I approach everything I build.
         </p>
       </div>
@@ -43,13 +43,13 @@ export default function AboutPage() {
         <a
           href={profile.resume}
           download
-          className="rounded-md bg-maroon px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-maroon-light hover:glow-border"
+          className="rounded-md bg-maroon px-5 py-2.5 text-sm font-semibold text-cream transition-all hover:bg-maroon-light hover:glow-border"
         >
           Download Résumé ↓
         </a>
         <Link
           href="/contact"
-          className="rounded-md border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-burnt hover:text-burnt"
+          className="rounded-md border border-white/15 px-5 py-2.5 text-sm font-semibold text-cream transition-colors hover:border-burnt hover:text-burnt"
         >
           Get in touch →
         </Link>
@@ -69,13 +69,13 @@ export default function AboutPage() {
                 }`}
               />
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="font-display text-xl font-bold text-white">
+                <h3 className="font-display text-xl font-bold text-cream">
                   {job.role}{" "}
                   <span className="text-maroon-light">@ {job.company}</span>
                 </h3>
-                <span className="font-mono text-xs text-zinc-500">{job.period}</span>
+                <span className="font-mono text-xs text-stone-500">{job.period}</span>
               </div>
-              <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+              <ul className="mt-3 space-y-2 text-sm text-stone-400">
                 {job.points.map((pt, i) => (
                   <li key={i} className="flex gap-2">
                     <span className="text-burnt">▹</span>
@@ -117,7 +117,7 @@ export default function AboutPage() {
               key={c.name}
               className="flex items-center justify-between rounded-xl border border-white/10 bg-ink-700/40 px-4 py-3"
             >
-              <span className="text-sm text-zinc-200">{c.name}</span>
+              <span className="text-sm text-stone-200">{c.name}</span>
               <span className="font-mono text-xs text-maroon-light">{c.year}</span>
             </div>
           ))}
@@ -134,11 +134,11 @@ export default function AboutPage() {
               className="rounded-2xl border border-white/10 bg-ink-700/40 p-5"
             >
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="font-display text-lg font-bold text-white">{e.school}</h3>
-                <span className="font-mono text-xs text-zinc-500">{e.period}</span>
+                <h3 className="font-display text-lg font-bold text-cream">{e.school}</h3>
+                <span className="font-mono text-xs text-stone-500">{e.period}</span>
               </div>
-              <p className="mt-1 text-sm text-zinc-300">{e.degree}</p>
-              {e.note && <p className="mt-1 text-sm text-zinc-500">{e.note}</p>}
+              <p className="mt-1 text-sm text-stone-300">{e.degree}</p>
+              {e.note && <p className="mt-1 text-sm text-stone-500">{e.note}</p>}
             </div>
           ))}
         </div>
@@ -151,7 +151,7 @@ export default function AboutPage() {
           {interests.map((it) => (
             <li
               key={it}
-              className="flex items-start gap-3 rounded-xl border border-white/10 bg-ink-700/40 px-4 py-3 text-sm text-zinc-300"
+              className="flex items-start gap-3 rounded-xl border border-white/10 bg-ink-700/40 px-4 py-3 text-sm text-stone-300"
             >
               <span className="text-burnt">◆</span>
               {it}

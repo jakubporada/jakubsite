@@ -19,7 +19,7 @@ export function ContactForm({ email }: { email: string }) {
   }
 
   const inputCls =
-    "w-full rounded-lg border border-white/10 bg-ink-800 px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 outline-none transition-colors focus:border-burnt";
+    "w-full rounded-lg border border-white/10 bg-ink-800 px-4 py-2.5 text-sm text-stone-100 placeholder-stone-600 outline-none transition-colors focus:border-burnt";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -47,11 +47,11 @@ export function ContactForm({ email }: { email: string }) {
       />
       <button
         type="submit"
-        className="w-full rounded-md bg-maroon px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-maroon-light hover:glow-border"
+        className="w-full rounded-md bg-maroon px-5 py-2.5 text-sm font-semibold text-cream transition-all hover:bg-maroon-light hover:glow-border"
       >
         Send Message →
       </button>
-      <p className="text-center font-mono text-xs text-zinc-600">
+      <p className="text-center font-mono text-xs text-stone-600">
         opens your email client — no data stored
       </p>
     </form>

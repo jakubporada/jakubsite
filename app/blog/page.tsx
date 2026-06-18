@@ -13,17 +13,17 @@ export default function BlogPage() {
   return (
     <div className="mx-auto max-w-4xl px-5 py-16">
       <p className="eyebrow mb-3">// the blog</p>
-      <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">
+      <h1 className="font-display text-4xl font-bold text-cream sm:text-5xl">
         Writeups &amp; <span className="text-gradient">notes</span>.
       </h1>
-      <p className="mt-4 max-w-2xl text-lg text-zinc-400">
+      <p className="mt-4 max-w-2xl text-lg text-stone-400">
         CTF writeups, project deep-dives, and lessons from the lab. Written mostly to force
         myself to actually understand things.
       </p>
 
       <div className="mt-14 space-y-4">
         {posts.length === 0 && (
-          <p className="text-zinc-500">No posts yet — check back soon.</p>
+          <p className="text-stone-500">No posts yet — check back soon.</p>
         )}
         {posts.map((post) => (
           <Link
@@ -35,16 +35,16 @@ export default function BlogPage() {
               <span className="rounded-full bg-maroon/20 px-2 py-0.5 font-mono text-maroon-light">
                 {post.category}
               </span>
-              <span className="font-mono text-zinc-500">{formatDate(post.date)}</span>
+              <span className="font-mono text-stone-500">{formatDate(post.date)}</span>
             </div>
-            <h2 className="font-display text-xl font-bold text-white group-hover:text-burnt">
+            <h2 className="font-display text-xl font-bold text-cream group-hover:text-burnt">
               {post.title}
             </h2>
-            <p className="mt-2 text-sm text-zinc-400">{post.excerpt}</p>
+            <p className="mt-2 text-sm text-stone-400">{post.excerpt}</p>
             {post.tags.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-2">
                 {post.tags.map((t) => (
-                  <span key={t} className="font-mono text-xs text-zinc-500">
+                  <span key={t} className="font-mono text-xs text-stone-500">
                     #{t}
                   </span>
                 ))}
