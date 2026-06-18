@@ -76,6 +76,20 @@ const config: Config = {
           "0%, 100%": { opacity: "1", transform: "scale(1)" },
           "50%": { opacity: "0.4", transform: "scale(0.85)" },
         },
+        // Route transition — content eases in on navigation.
+        "page-in": {
+          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        // Command menu entrance.
+        "menu-in": {
+          "0%": { opacity: "0", transform: "translateY(-8px) scale(0.98)" },
+          "100%": { opacity: "1", transform: "translateY(0) scale(1)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
       },
       animation: {
         blink: "blink 1.1s step-end infinite",
@@ -84,6 +98,9 @@ const config: Config = {
         "signal-dash": "signal-dash 6s linear infinite",
         marquee: "marquee 32s linear infinite",
         ping: "ping 1.8s ease-in-out infinite",
+        "page-in": "page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "menu-in": "menu-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "fade-in": "fade-in 0.2s ease-out both",
       },
     },
   },

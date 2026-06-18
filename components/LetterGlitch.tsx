@@ -136,19 +136,28 @@ export function LetterGlitch({
       if (redraw) draw();
     };
 
-    // ignite characters in a radius around the cursor
+    // ignite characters in a TRUE pixel circle centered on the cursor.
+    // cells are 10x20px, so we measure distance in pixels (not cells) —
+    // otherwise the region comes out as a tall ellipse, not a circle.
+    const radiusPx = 70;
     const disturb = () => {
       if (!mouse.current.active) return;
       const cols = grid.current.columns;
-      const cx = Math.floor(mouse.current.x / charWidth);
-      const cy = Math.floor(mouse.current.y / charHeight);
-      const radius = 5;
-      for (let dy = -radius; dy <= radius; dy++) {
-        for (let dx = -radius; dx <= radius; dx++) {
-          if (dx * dx + dy * dy > radius * radius) continue;
-          const col = cx + dx;
-          const row = cy + dy;
+      const mx = mouse.current.x;
+      const my = mouse.current.y;
+      const ccol = Math.floor(mx / charWidth);
+      const crow = Math.floor(my / charHeight);
+      const colSpan = Math.ceil(radiusPx / charWidth);
+      const rowSpan = Math.ceil(radiusPx / charHeight);
+      for (let dy = -rowSpan; dy <= rowSpan; dy++) {
+        for (let dx = -colSpan; dx <= colSpan; dx++) {
+          const col = ccol + dx;
+          const row = crow + dy;
           if (col < 0 || row < 0 || col >= cols) continue;
+          // cell center in pixels vs the actual cursor position
+          const px = col * charWidth + charWidth / 2;
+          const py = row * charHeight + charHeight / 2;
+          if (Math.hypot(px - mx, py - my) > radiusPx) continue;
           const idx = row * cols + col;
           const l = letters.current[idx];
           if (!l) continue;
@@ -178,21 +187,32 @@ export function LetterGlitch({
     resize();
     if (!reduce) animate();
 
-    // map the pointer onto the canvas so the glitch reacts wherever it is
-    // over the hero, even though content sits on top of it
-    const onMove = (e: MouseEvent) => {
+    // map any pointer (mouse OR touch) onto the canvas so the glitch reacts
+    // wherever it is over the hero, even though content sits on top of it.
+    // a screen-blended glow div follows the pointer for a smooth circle.
+    const setPointer = (clientX: number, clientY: number) => {
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
       const inside = x >= 0 && y >= 0 && x <= rect.width && y <= rect.height;
       mouse.current = { x, y, active: inside };
     };
-    const onLeave = () => {
+    const clearPointer = () => {
       mouse.current.active = false;
     };
+
+    const onMouseMove = (e: MouseEvent) => setPointer(e.clientX, e.clientY);
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (t) setPointer(t.clientX, t.clientY);
+    };
     if (!reduce) {
-      window.addEventListener("mousemove", onMove, { passive: true });
-      window.addEventListener("mouseout", onLeave);
+      window.addEventListener("mousemove", onMouseMove, { passive: true });
+      window.addEventListener("mouseout", clearPointer);
+      window.addEventListener("touchstart", onTouch, { passive: true });
+      window.addEventListener("touchmove", onTouch, { passive: true });
+      window.addEventListener("touchend", clearPointer);
+      window.addEventListener("touchcancel", clearPointer);
     }
 
     let t: ReturnType<typeof setTimeout>;
@@ -208,8 +228,12 @@ export function LetterGlitch({
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", onResize);
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseout", onLeave);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseout", clearPointer);
+      window.removeEventListener("touchstart", onTouch);
+      window.removeEventListener("touchmove", onTouch);
+      window.removeEventListener("touchend", clearPointer);
+      window.removeEventListener("touchcancel", clearPointer);
       clearTimeout(t);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
