@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { Terminal } from "@/components/Terminal";
-import { SectionHeading } from "@/components/ui";
+import { LetterGlitch } from "@/components/LetterGlitch";
+import { Reveal } from "@/components/Reveal";
+import { ScrollStack } from "@/components/ScrollStack";
+import { SectionHeading, Tag } from "@/components/ui";
 import {
   profile,
   projects,
@@ -27,11 +30,14 @@ export default function HomePage() {
     <>
       {/* ---------- Hero ---------- */}
       <section className="relative overflow-hidden">
-        <div className="grid-bg absolute inset-0 -z-10" />
+        {/* Letter Glitch background — atmospheric maroon "signal" */}
+        <div className="absolute inset-0 -z-20 opacity-60">
+          <LetterGlitch glitchSpeed={75} outerVignette centerVignette={false} />
+        </div>
 
         {/* The live detection signal — an IDS/EKG sweep tied to network defense */}
         <svg
-          className="pointer-events-none absolute inset-x-0 bottom-10 -z-10 h-48 w-full opacity-50"
+          className="pointer-events-none absolute inset-x-0 bottom-10 -z-10 h-48 w-full opacity-40"
           viewBox="0 0 1200 200"
           preserveAspectRatio="none"
           aria-hidden="true"
@@ -83,10 +89,7 @@ export default function HomePage() {
             <h1 className="font-display text-6xl font-bold leading-[0.92] tracking-tight text-cream sm:text-7xl lg:text-8xl">
               Jakub
               <br />
-              <span className="relative inline-block">
-                Porada
-                <span className="absolute -bottom-1 left-0 -z-10 h-4 w-full -skew-x-6 bg-maroon/40" />
-              </span>
+              Porada
             </h1>
             <p className="mt-7 max-w-md text-lg leading-relaxed text-sand">
               {profile.tagline}
@@ -164,7 +167,7 @@ export default function HomePage() {
 
       {/* ---------- Intro slab (Hokie Stone) ---------- */}
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <div className="hokie-stone glow-border relative overflow-hidden rounded-2xl border border-white/10 p-8 sm:p-12">
+        <Reveal className="hokie-stone glow-border relative overflow-hidden rounded-2xl border border-white/10 p-8 sm:p-12">
           <span className="pointer-events-none absolute -right-6 -top-6 font-display text-[10rem] font-bold leading-none text-white/[0.03]">
             VT
           </span>
@@ -182,47 +185,59 @@ export default function HomePage() {
           >
             → read the full story
           </Link>
-        </div>
+        </Reveal>
       </section>
 
-      {/* ---------- Selected work — editorial index ---------- */}
+      {/* ---------- Selected work — scroll stack ---------- */}
       <section className="mx-auto max-w-6xl px-5 pb-20">
-        <SectionHeading eyebrow="// selected work" title="Selected Work">
-          A couple of systems I&apos;ve built end to end. The full index lives on the
-          projects page.
-        </SectionHeading>
+        <Reveal>
+          <SectionHeading eyebrow="// selected work" title="Selected Work">
+            A couple of systems I&apos;ve built end to end — scroll through them.
+          </SectionHeading>
+        </Reveal>
 
-        <div className="rule">
-          {featured.map((p, i) => (
+        <ScrollStack
+          items={featured.map((p, i) => (
             <Link
               key={p.slug}
               href={`/projects#${p.slug}`}
-              className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-5 border-b border-white/[0.07] py-7 transition-colors hover:bg-white/[0.02] sm:gap-x-8"
+              className="group block overflow-hidden rounded-2xl border border-white/10 bg-ink-800 p-8 glow-border transition-colors hover:border-maroon-light/40 sm:p-10"
             >
-              <span className="font-mono text-sm text-burnt">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <h3 className="font-display text-2xl font-bold text-cream transition-colors group-hover:text-gradient sm:text-3xl">
-                  {p.title}
-                </h3>
-                <p className="mt-2 max-w-2xl text-sm text-sand">{p.blurb}</p>
-                <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-[0.16em] text-hokie-400">
-                  {p.stack.map((s) => (
-                    <span key={s}>{s}</span>
-                  ))}
-                </div>
+              <div className="mb-5 flex items-center justify-between">
+                <span className="font-mono text-sm text-burnt">
+                  {String(i + 1).padStart(2, "0")} / {String(featured.length).padStart(2, "0")}
+                </span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-hokie-400">
+                  Featured
+                </span>
               </div>
-              <span className="text-hokie-400 transition-transform group-hover:translate-x-1 group-hover:text-burnt">
-                →
+              <h3 className="font-display text-3xl font-bold text-cream transition-colors group-hover:text-gradient sm:text-4xl">
+                {p.title}
+              </h3>
+              <p className="mt-3 max-w-2xl text-sand">{p.blurb}</p>
+              <ul className="mt-5 space-y-2">
+                {p.points.map((pt) => (
+                  <li key={pt} className="flex gap-3 text-sm text-hokie-200">
+                    <span className="mt-0.5 shrink-0 text-burnt">▸</span>
+                    <span>{pt}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {p.stack.map((s) => (
+                  <Tag key={s}>{s}</Tag>
+                ))}
+              </div>
+              <span className="mt-7 inline-flex items-center gap-2 font-mono text-sm text-burnt transition-transform group-hover:translate-x-1">
+                View project →
               </span>
             </Link>
           ))}
-        </div>
+        />
 
         <Link
           href="/projects"
-          className="mt-8 inline-block font-mono text-sm text-burnt transition-colors hover:text-burnt-light"
+          className="mt-10 inline-block font-mono text-sm text-burnt transition-colors hover:text-burnt-light"
         >
           → see all projects
         </Link>
@@ -235,11 +250,11 @@ export default function HomePage() {
             CTF writeups and notes from the home lab.
           </SectionHeading>
           <div className="grid gap-6 md:grid-cols-2">
-            {latestPosts.map((post) => (
+            {latestPosts.map((post, i) => (
+              <Reveal key={post.slug} delay={i * 90}>
               <Link
-                key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group rounded-2xl border border-white/10 bg-ink-800/60 p-6 transition-all hover:-translate-y-1 hover:border-burnt/40"
+                className="group block h-full rounded-2xl border border-white/10 bg-ink-800/60 p-6 transition-all hover:-translate-y-1 hover:border-burnt/40"
               >
                 <div className="mb-2 flex items-center gap-3 text-xs">
                   <span className="rounded-full bg-maroon/20 px-2 py-0.5 font-mono text-maroon-light">
@@ -252,6 +267,7 @@ export default function HomePage() {
                 </h3>
                 <p className="mt-2 text-sm text-sand">{post.excerpt}</p>
               </Link>
+              </Reveal>
             ))}
           </div>
           <Link
@@ -265,7 +281,7 @@ export default function HomePage() {
 
       {/* ---------- CTA band ---------- */}
       <section className="mx-auto max-w-6xl px-5 pb-24">
-        <div className="relative overflow-hidden rounded-2xl border border-maroon-light/20 bg-gradient-to-br from-maroon/15 to-ink-800/40 p-10 text-center sm:p-14">
+        <Reveal className="relative overflow-hidden rounded-2xl border border-maroon-light/20 bg-gradient-to-br from-maroon/15 to-ink-800/40 p-10 text-center sm:p-14">
           <p className="eyebrow mb-3">// open to internships</p>
           <h2 className="font-display text-3xl font-bold tracking-tight text-cream sm:text-4xl">
             Let&apos;s build something secure.
@@ -289,7 +305,7 @@ export default function HomePage() {
               Download Résumé ↓
             </a>
           </div>
-        </div>
+        </Reveal>
       </section>
     </>
   );
