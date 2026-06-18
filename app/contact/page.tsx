@@ -18,10 +18,10 @@ export default function ContactPage() {
   return (
     <div className="mx-auto max-w-4xl px-5 py-16">
       <p className="eyebrow mb-3">// contact</p>
-      <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">
+      <h1 className="font-display text-4xl font-bold text-cream sm:text-5xl">
         Let&apos;s <span className="text-gradient">talk</span>.
       </h1>
-      <p className="mt-4 max-w-2xl text-lg text-zinc-400">
+      <p className="mt-4 max-w-2xl text-lg text-stone-400">
         I&apos;m actively looking for internship opportunities in cybersecurity, reverse
         engineering, and security engineering. Recruiters and fellow builders — reach out.
       </p>
@@ -39,10 +39,10 @@ export default function ContactPage() {
                 rel="noreferrer"
                 className="group flex items-center justify-between rounded-xl border border-white/10 bg-ink-700/40 px-4 py-3 transition-all hover:border-maroon-light/40 hover:glow-border"
               >
-                <span className="font-mono text-xs uppercase tracking-wider text-zinc-500">
+                <span className="font-mono text-xs uppercase tracking-wider text-stone-500">
                   {c.label}
                 </span>
-                <span className="text-sm text-zinc-200 group-hover:text-burnt">
+                <span className="text-sm text-stone-200 group-hover:text-burnt">
                   {c.value}
                 </span>
               </a>
@@ -52,7 +52,7 @@ export default function ContactPage() {
           <a
             href={profile.resume}
             download
-            className="mt-6 inline-block rounded-md border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-burnt hover:text-burnt"
+            className="mt-6 inline-block rounded-md border border-white/15 px-5 py-2.5 text-sm font-semibold text-cream transition-colors hover:border-burnt hover:text-burnt"
           >
             Download Résumé ↓
           </a>

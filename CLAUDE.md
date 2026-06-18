@@ -82,13 +82,21 @@ object and the `switch` in `run()`.
 
 ## Design / styling conventions
 
-- Dark theme. Color tokens are centralized in `tailwind.config.ts` (`maroon`,
-  `burnt`, `hokie`, `ink`) — **change the palette there**, plus the gradient in
-  `.text-gradient` and glow in `.glow-border` (both in `globals.css`).
+- **Warm refined dark theme** (not cool/neon). Base is a warm near-black (`ink`
+  tokens), grays are warm (`stone`, not `zinc`), headings are `cream` (#f3ede4),
+  secondary text is `sand`. Accents: `maroon` + `burnt` (orange), used sparingly.
+- Tokens are centralized in `tailwind.config.ts` (`maroon`, `burnt`, `hokie`,
+  `ink`, `cream`, `sand`) — **change the palette there**. Helpers in `globals.css`:
+  `.text-gradient` (sparing), `.glow-border` (warm shadow lift, not neon),
+  `.chip-maroon` (the maroon stat pill), `.grain` (film-grain overlay on `body`),
+  `.grid-bg`, `.eyebrow`, `.rule`.
 - Fonts via `next/font`: Space Grotesk (display/headings), Inter (body),
   JetBrains Mono (code/terminal/labels).
-- Reusable patterns: `.eyebrow` (mono uppercase label), `.text-gradient`,
-  `.glow-border`, `<SectionHeading>`, `<Tag>`.
+- Hero (`app/page.tsx`) intentionally mirrors a mockup Jakub provided: orange
+  eyebrow, big cream name, stat row driven by `stats[].tone` ("accent"=orange,
+  "chip"=maroon pill, "plain"=cream) in `lib/data.ts`.
+- To screenshot for visual checks: `npm run start -- -p 3100`, then headless
+  Chrome `--screenshot` against `http://localhost:3100`.
 
 ## User preferences (important)
 

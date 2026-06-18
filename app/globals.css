@@ -14,35 +14,107 @@ html {
 }
 
 body {
-  @apply bg-ink text-zinc-200 antialiased;
+  @apply bg-ink text-sand antialiased;
+  /* Warm, restrained light from the top corners — no neon. */
   background-image:
-    radial-gradient(60rem 40rem at 80% -10%, rgba(134, 31, 65, 0.18), transparent 60%),
-    radial-gradient(50rem 40rem at 0% 10%, rgba(232, 119, 34, 0.08), transparent 55%);
+    radial-gradient(70rem 42rem at 92% -12%, rgba(134, 31, 65, 0.14), transparent 60%),
+    radial-gradient(58rem 42rem at -8% 6%, rgba(229, 117, 31, 0.06), transparent 56%);
   background-attachment: fixed;
 }
 
-/* Subtle technical grid overlay */
-.grid-bg {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 48px 48px;
+::selection {
+  background: rgba(134, 31, 65, 0.45);
+  color: #f5efe6;
 }
 
-/* Maroon -> orange gradient text */
+/* Faint warm film grain for a tactile, hand-made feel */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Hokie Stone ----------
+   The mottled dolomite limestone every Virginia Tech building is made of.
+   Layered speckle gradients in warm grays + maroon/black flecks over a
+   stone-gray base. Used on signature surfaces (the intro slab, accents). */
+.hokie-stone {
+  background-color: #2a2521;
+  background-image:
+    radial-gradient(circle at 12% 22%, rgba(181, 170, 160, 0.16) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 68% 14%, rgba(134, 31, 65, 0.22) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 38% 64%, rgba(245, 239, 230, 0.1) 0 1px, transparent 2px),
+    radial-gradient(circle at 84% 72%, rgba(20, 16, 14, 0.7) 0 2px, transparent 3px),
+    radial-gradient(circle at 24% 88%, rgba(229, 117, 31, 0.14) 0 1px, transparent 2px),
+    radial-gradient(circle at 56% 40%, rgba(181, 170, 160, 0.12) 0 1px, transparent 2px),
+    radial-gradient(circle at 92% 36%, rgba(245, 239, 230, 0.08) 0 1px, transparent 2px),
+    linear-gradient(135deg, #322b26 0%, #221b16 60%, #1a1512 100%);
+  background-size:
+    90px 90px, 120px 120px, 70px 70px, 140px 140px, 100px 100px, 80px 80px, 110px 110px, 100% 100%;
+}
+
+/* Subtle technical engineering grid */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(245, 239, 230, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 239, 230, 0.03) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(75% 65% at 50% 38%, #000 28%, transparent 100%);
+}
+
+/* Maroon -> orange gradient text — used sparingly, only on key words */
 .text-gradient {
   @apply bg-clip-text text-transparent;
-  background-image: linear-gradient(120deg, #a83258 0%, #E87722 100%);
+  background-image: linear-gradient(108deg, #b8456a 0%, #E5751F 92%);
 }
 
 /* Thin uppercase mono label */
 .eyebrow {
-  @apply font-mono text-xs uppercase tracking-[0.25em] text-burnt;
+  @apply font-mono text-xs uppercase tracking-[0.3em] text-burnt;
 }
 
-/* Glow ring used on cards / buttons */
+/* Refined warm-shadow card lift (no neon ring) */
 .glow-border {
-  box-shadow: 0 0 0 1px rgba(134, 31, 65, 0.35), 0 0 40px -12px rgba(134, 31, 65, 0.5);
+  box-shadow:
+    0 1px 0 0 rgba(245, 239, 230, 0.05) inset,
+    0 28px 64px -30px rgba(0, 0, 0, 0.9);
+}
+
+/* Maroon chip used for highlight stats */
+.chip-maroon {
+  background: linear-gradient(180deg, rgba(184, 69, 106, 0.24), rgba(134, 31, 65, 0.16));
+  border: 1px solid rgba(184, 69, 106, 0.4);
+}
+
+/* Hairline divider with a warm tint */
+.rule {
+  @apply border-t border-white/[0.07];
+}
+
+/* The live detection signal — animated IDS sparkline stroke */
+.signal-line {
+  stroke-dasharray: 1400;
+  animation: signal-dash 6s linear infinite;
+}
+
+/* Marquee track (certifications ticker) — pauses on hover */
+.marquee-track {
+  animation: marquee 32s linear infinite;
+  width: max-content;
+}
+.marquee-mask:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal-line,
+  .marquee-track {
+    animation: none;
+  }
 }
 
 /* Custom scrollbar */
@@ -50,10 +122,10 @@ body {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0c;
+  background: #100c0a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a2a32;
+  background: #3a342f;
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -62,13 +134,13 @@ body {
 
 /* ---------- Blog article (markdown) typography ---------- */
 .prose-article {
-  @apply text-zinc-300 leading-relaxed;
+  @apply text-sand leading-relaxed;
 }
 .prose-article h2 {
-  @apply font-display text-2xl font-bold text-white mt-12 mb-4 scroll-mt-24;
+  @apply font-display text-2xl font-bold text-cream mt-12 mb-4 scroll-mt-24;
 }
 .prose-article h3 {
-  @apply font-display text-xl font-semibold text-white mt-8 mb-3 scroll-mt-24;
+  @apply font-display text-xl font-semibold text-cream mt-8 mb-3 scroll-mt-24;
 }
 .prose-article p {
   @apply my-4;
@@ -83,10 +155,10 @@ body {
   @apply my-4 list-decimal pl-6 space-y-2;
 }
 .prose-article strong {
-  @apply text-white font-semibold;
+  @apply text-cream font-semibold;
 }
 .prose-article blockquote {
-  @apply border-l-2 border-maroon pl-4 italic text-zinc-400 my-6;
+  @apply border-l-2 border-maroon pl-4 italic text-hokie-200 my-6;
 }
 .prose-article code:not(pre code) {
   @apply font-mono text-sm text-burnt-light bg-ink-700 px-1.5 py-0.5 rounded;

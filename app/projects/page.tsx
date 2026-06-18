@@ -12,10 +12,10 @@ export default function ProjectsPage() {
   return (
     <div className="mx-auto max-w-4xl px-5 py-16">
       <p className="eyebrow mb-3">// selected work</p>
-      <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">
+      <h1 className="font-display text-4xl font-bold text-cream sm:text-5xl">
         Things I&apos;ve <span className="text-gradient">built</span>.
       </h1>
-      <p className="mt-4 max-w-2xl text-lg text-zinc-400">
+      <p className="mt-4 max-w-2xl text-lg text-stone-400">
         Hands-on security and engineering projects — from physical SOC builds to
         machine-learning detection pipelines.
       </p>
@@ -37,10 +37,10 @@ export default function ProjectsPage() {
                 </span>
               )}
             </div>
-            <h2 className="font-display text-2xl font-bold text-white">{p.title}</h2>
-            <p className="mt-2 text-zinc-400">{p.blurb}</p>
+            <h2 className="font-display text-2xl font-bold text-cream">{p.title}</h2>
+            <p className="mt-2 text-stone-400">{p.blurb}</p>
 
-            <ul className="mt-4 space-y-2 text-sm text-zinc-300">
+            <ul className="mt-4 space-y-2 text-sm text-stone-300">
               {p.points.map((pt, i) => (
                 <li key={i} className="flex gap-2">
                   <span className="text-burnt">▹</span>
@@ -59,7 +59,7 @@ export default function ProjectsPage() {
       </div>
 
       <div className="mt-14 rounded-2xl border border-dashed border-white/15 p-8 text-center">
-        <p className="text-zinc-400">
+        <p className="text-stone-400">
           More on my{" "}
           <a
             href={profile.github}

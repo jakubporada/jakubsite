@@ -21,11 +21,11 @@ export function Navbar() {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/5 bg-ink/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-white/5 bg-ink/75 backdrop-blur-md">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <Link href="/" className="group flex items-center gap-2 font-display font-bold">
           <span className="font-mono text-burnt">{">"}</span>
-          <span className="text-white">jakub</span>
+          <span className="text-cream">jakub</span>
           <span className="text-maroon-light group-hover:text-burnt transition-colors">
             porada
           </span>
@@ -37,19 +37,22 @@ export function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+              className={`relative rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                 isActive(l.href)
                   ? "text-burnt"
-                  : "text-zinc-400 hover:text-white"
+                  : "text-hokie-200 hover:text-cream"
               }`}
             >
               {l.label}
+              {isActive(l.href) && (
+                <span className="absolute inset-x-3 -bottom-px h-px bg-burnt" />
+              )}
             </Link>
           ))}
           <a
             href={profile.resume}
             download
-            className="ml-3 rounded-md border border-maroon-light/40 bg-maroon/20 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-maroon hover:glow-border"
+            className="ml-3 rounded-md border border-maroon-light/40 bg-maroon/20 px-4 py-2 text-sm font-semibold text-cream transition-all hover:bg-maroon hover:glow-border"
           >
             Resume ↓
           </a>
@@ -58,7 +61,7 @@ export function Navbar() {
         {/* Mobile toggle */}
         <button
           onClick={() => setOpen((v) => !v)}
-          className="rounded-md p-2 text-zinc-300 md:hidden"
+          className="rounded-md p-2 text-stone-300 md:hidden"
           aria-label="Toggle menu"
         >
           <div className="space-y-1.5">
@@ -78,7 +81,7 @@ export function Navbar() {
               href={l.href}
               onClick={() => setOpen(false)}
               className={`block rounded-md px-3 py-2 text-sm ${
-                isActive(l.href) ? "text-burnt" : "text-zinc-300"
+                isActive(l.href) ? "text-burnt" : "text-hokie-200"
               }`}
             >
               {l.label}
@@ -87,7 +90,7 @@ export function Navbar() {
           <a
             href={profile.resume}
             download
-            className="mt-2 block rounded-md border border-maroon-light/40 bg-maroon/20 px-3 py-2 text-center text-sm font-semibold text-white"
+            className="mt-2 block rounded-md border border-maroon-light/40 bg-maroon/20 px-3 py-2 text-center text-sm font-semibold text-cream"
           >
             Download Resume ↓
           </a>
