@@ -42,6 +42,12 @@ const config: Config = {
         },
         cream: "#f5efe6", // headings
         sand: "#c8b8a8", // secondary text
+        // Field Manual — the paper surface the dossier opens onto.
+        paper: {
+          DEFAULT: "#f2ebdb", // aged manila
+          light: "#faf6ea", // card sheets
+          line: "#e3d9c3", // hairlines on paper
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

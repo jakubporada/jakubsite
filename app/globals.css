@@ -117,6 +117,48 @@ body {
   }
 }
 
+/* ---------- Field Manual: the paper dossier below the hero ---------- */
+
+/* Redacted text — hover (or tap) to declassify */
+.redact {
+  background: #1b1410;
+  color: transparent;
+  border-radius: 2px;
+  padding: 0 0.4em;
+  cursor: help;
+  transition: background 0.35s ease, color 0.35s ease;
+  user-select: none;
+}
+.redact:hover,
+.redact:focus {
+  background: rgba(99, 0, 49, 0.12);
+  color: #630031;
+  user-select: text;
+}
+
+/* Ruled index-card lines (lab notes) */
+.ruled {
+  background-image: repeating-linear-gradient(
+    transparent 0 26px,
+    rgba(99, 0, 49, 0.09) 26px 27px
+  );
+}
+
+/* Document barcode — pure CSS, decorative */
+.barcode {
+  background-image: repeating-linear-gradient(
+    90deg,
+    currentColor 0 2px,
+    transparent 2px 4px,
+    currentColor 4px 5px,
+    transparent 5px 9px,
+    currentColor 9px 12px,
+    transparent 12px 14px,
+    currentColor 14px 15px,
+    transparent 15px 18px
+  );
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
