@@ -101,6 +101,11 @@ const config: Config = {
           "0%": { width: "0%" },
           "100%": { width: "100%" },
         },
+        // JP-OS window opening pop.
+        "window-in": {
+          "0%": { opacity: "0", transform: "scale(0.96) translateY(10px)" },
+          "100%": { opacity: "1", transform: "scale(1) translateY(0)" },
+        },
       },
       animation: {
         blink: "blink 1.1s step-end infinite",
@@ -113,6 +118,7 @@ const config: Config = {
         "menu-in": "menu-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both",
         "fade-in": "fade-in 0.2s ease-out both",
         "boot-progress": "boot-progress 1.5s ease-out both",
+        "window-in": "window-in 0.18s cubic-bezier(0.22, 1, 0.36, 1) both",
       },
     },
   },

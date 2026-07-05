@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { profile, experience, skills, certifications, education } from "@/lib/data";
 
 /* About.app — compact dossier for a window. Content sourced from lib/data.ts. */
@@ -14,12 +13,6 @@ export function AboutContent() {
         </h2>
         <p className="mt-1 text-sm text-maroon-light">{profile.role} · {profile.school}</p>
         <p className="mt-4 text-sm leading-relaxed text-sand">{profile.summary}</p>
-        <Link
-          href="/about"
-          className="mt-3 inline-block font-mono text-xs text-burnt hover:text-burnt-light"
-        >
-          → full story on the classic site
-        </Link>
       </section>
 
       <section>

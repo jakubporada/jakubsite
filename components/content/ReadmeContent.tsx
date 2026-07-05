@@ -1,14 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { profile } from "@/lib/data";
-import { useWindows } from "@/components/os/WindowManager";
+import type { AppId } from "@/components/os/WindowManager";
 
 /* README.txt — the friendly on-ramp. Auto-opens on first visit so
  * non-technical visitors are never stranded on an empty desktop. */
-export function ReadmeContent() {
-  const { openApp } = useWindows();
-
+export function ReadmeContent({ onOpen }: { onOpen: (app: AppId) => void }) {
   return (
     <div className="p-6 sm:p-8">
       <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-burnt">
@@ -33,13 +30,19 @@ export function ReadmeContent() {
           Download my résumé ↓
         </a>
         <button
-          onClick={() => openApp("projects")}
+          onClick={() => onOpen("projects")}
           className="block w-full rounded-lg border border-white/15 px-4 py-3 text-center text-sm font-semibold text-cream transition-colors hover:border-burnt hover:text-burnt"
         >
           See what I&apos;ve built →
         </button>
         <button
-          onClick={() => openApp("contact")}
+          onClick={() => onOpen("about")}
+          className="block w-full rounded-lg border border-white/15 px-4 py-3 text-center text-sm font-semibold text-cream transition-colors hover:border-burnt hover:text-burnt"
+        >
+          Who is Jakub?
+        </button>
+        <button
+          onClick={() => onOpen("contact")}
           className="block w-full rounded-lg border border-white/15 px-4 py-3 text-center text-sm font-semibold text-cream transition-colors hover:border-burnt hover:text-burnt"
         >
           Get in touch
@@ -53,13 +56,6 @@ export function ReadmeContent() {
           there&apos;s a flag hidden somewhere.
         </p>
       </div>
-
-      <p className="mt-6 border-t border-white/10 pt-4 text-sm text-hokie-300">
-        Prefer a normal website?{" "}
-        <Link href="/overview" className="text-burnt underline underline-offset-4 hover:text-burnt-light">
-          Open the classic site →
-        </Link>
-      </p>
     </div>
   );
 }

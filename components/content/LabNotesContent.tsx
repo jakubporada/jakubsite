@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -36,12 +35,6 @@ export function LabNotesContent({ posts }: { posts: Post[] }) {
             {post.content}
           </ReactMarkdown>
         </div>
-        <Link
-          href={`/blog/${post.slug}`}
-          className="mt-6 inline-block font-mono text-xs text-burnt hover:text-burnt-light"
-        >
-          → open on the classic site
-        </Link>
       </div>
     );
   }

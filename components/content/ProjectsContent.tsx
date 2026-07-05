@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { projects } from "@/lib/data";
 
 /* Projects.app — the exhibits, windowed. */
@@ -44,12 +43,6 @@ export function ProjectsContent() {
               </span>
             ))}
           </div>
-          <Link
-            href={`/projects#${p.slug}`}
-            className="mt-3 inline-block font-mono text-xs text-burnt hover:text-burnt-light"
-          >
-            → open full page
-          </Link>
         </article>
       ))}
     </div>

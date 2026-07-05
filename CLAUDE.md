@@ -93,14 +93,17 @@ browser: boot splash (skippable, once per session via `sessionStorage`), glitch
 wallpaper, menu bar (⬡ JP-OS menu, availability status, clock), draggable/
 resizable/minimizable windows, dock with running-app dots, desktop icons.
 On first load it auto-opens **Terminal + README.txt** (README = HR onboarding
-with big buttons + "classic site → /overview" escape hatch).
+with big buttons: résumé / projects / about / contact).
 
 - Window state lives in `components/os/WindowManager.tsx` (context). Windows
   stay mounted while open so Terminal scrollback survives minimize.
 - Dragging mutates DOM style directly and commits bounds on pointer-up (no
   re-render per move). Esc closes the focused window (unless typing).
-- **Mobile (<768px)** renders a phone-style launcher grid instead — icons link
-  to the classic routes; Terminal opens as a full-screen sheet. Never drag on touch.
+- **Mobile (<768px)** renders a phone-style launcher grid instead — every app
+  opens as a full-screen sheet (same content components). Never drag on touch.
+- **The classic pages (/overview, /about, /projects, /blog, /contact) still
+  exist but are deliberately UNLINKED from JP-OS** (Jakub's call, July 2026) —
+  endpoints kept for later/SEO. Don't add UI links back without asking.
 - `open <app>` in the Terminal opens OS windows (`onOpenApp` prop) — the whole
   site is drivable from the shell.
 - Add an app: extend `AppId` + `DEFAULT_SIZE` in WindowManager, register title/

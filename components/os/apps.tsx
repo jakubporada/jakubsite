@@ -3,7 +3,6 @@
 import { ReactNode } from "react";
 import type { Post } from "@/lib/blog";
 import type { AppId } from "./WindowManager";
-import { useWindows } from "./WindowManager";
 import { Terminal } from "@/components/Terminal";
 import dynamic from "next/dynamic";
 import { ReadmeContent } from "@/components/content/ReadmeContent";
@@ -90,40 +89,36 @@ export const ICONS: Record<AppId | "resume" | "overview", ReactNode> = {
   ),
 };
 
-/* Terminal wrapped so `open <app>` can drive the window manager. */
-function TerminalApp() {
-  const { openApp } = useWindows();
-  return (
-    <Terminal
-      frameless
-      onOpenApp={(app) => {
-        const valid: AppId[] = ["terminal", "readme", "about", "projects", "notes", "contact"];
-        if (valid.includes(app as AppId)) {
-          openApp(app as AppId);
-          return true;
-        }
-        return false;
-      }}
-    />
-  );
-}
+const VALID_APPS: AppId[] = ["terminal", "readme", "about", "projects", "notes", "contact"];
 
 export type AppDef = {
   title: string;
   label: string; // short dock label
-  render: (props: { posts: Post[] }) => ReactNode;
+  /** `open` launches another app — a window on desktop, a sheet on mobile. */
+  render: (props: { posts: Post[]; open: (app: AppId) => void }) => ReactNode;
 };
 
 export const APPS: Record<AppId, AppDef> = {
   terminal: {
     title: "terminal — visitor@jp-os",
     label: "Terminal",
-    render: () => <TerminalApp />,
+    render: ({ open }) => (
+      <Terminal
+        frameless
+        onOpenApp={(app) => {
+          if (VALID_APPS.includes(app as AppId)) {
+            open(app as AppId);
+            return true;
+          }
+          return false;
+        }}
+      />
+    ),
   },
   readme: {
     title: "README.txt",
     label: "README",
-    render: () => <ReadmeContent />,
+    render: ({ open }) => <ReadmeContent onOpen={open} />,
   },
   about: {
     title: "about — jakub porada",

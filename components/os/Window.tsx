@@ -101,7 +101,7 @@ export function OSWindow({
       role="dialog"
       aria-label={title}
       onPointerDown={() => focus(win.id)}
-      className={`absolute flex flex-col overflow-hidden rounded-xl border font-sans transition-[opacity] duration-150 ${
+      className={`absolute flex animate-window-in flex-col overflow-hidden rounded-xl border font-sans transition-[opacity] duration-150 motion-reduce:animate-none ${
         focused
           ? "border-maroon-light/40 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.95)]"
           : "border-white/10 opacity-[0.97] shadow-[0_24px_60px_-30px_rgba(0,0,0,0.8)]"

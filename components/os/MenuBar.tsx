@@ -1,13 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { profile } from "@/lib/data";
 import { useWindows } from "./WindowManager";
+import { APPS } from "./apps";
 
-/* JP-OS menu bar: system menu, availability status, live clock. */
+/* JP-OS menu bar: system menu, focused-app name, availability, live clock. */
 export function MenuBar() {
-  const { openApp } = useWindows();
+  const { openApp, windows, topId } = useWindows();
+  const focusedApp = windows.find((w) => w.id === topId)?.appId ?? null;
   const [menuOpen, setMenuOpen] = useState(false);
   const [time, setTime] = useState<string>("");
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -56,12 +57,6 @@ export function MenuBar() {
             >
               About this OS
             </button>
-            <Link
-              href="/overview"
-              className="block px-4 py-2 hover:bg-maroon/30 hover:text-cream"
-            >
-              Classic site →
-            </Link>
             <a
               href={profile.resume}
               download
@@ -91,7 +86,11 @@ export function MenuBar() {
         )}
       </div>
 
-      <span className="hidden text-hokie-400 sm:block">jakubporada.com</span>
+      {/* focused app name — like a real OS */}
+      <span className="hidden font-semibold text-cream sm:block">
+        {focusedApp ? APPS[focusedApp].label : "Desktop"}
+      </span>
+      <span className="hidden text-hokie-400 md:block">jakubporada.com</span>
 
       <span className="ml-auto hidden items-center gap-2 uppercase tracking-[0.14em] text-hokie-300 sm:flex">
         <span className="relative flex h-1.5 w-1.5">
