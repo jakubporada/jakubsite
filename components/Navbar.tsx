@@ -7,7 +7,7 @@ import { profile } from "@/lib/data";
 import { CommandMenu, CommandItem } from "@/components/CommandMenu";
 
 const links = [
-  { href: "/", label: "Home" },
+  { href: "/overview", label: "Overview" },
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
@@ -15,7 +15,8 @@ const links = [
 ];
 
 const menuItems: CommandItem[] = [
-  { href: "/", label: "Home", hint: "~" },
+  { href: "/", label: "JP-OS desktop", hint: "boot ~" },
+  { href: "/overview", label: "Overview", hint: "classic home" },
   { href: "/about", label: "About", hint: "whoami" },
   { href: "/projects", label: "Projects", hint: "ls ./work" },
   { href: "/blog", label: "Blog", hint: "cat notes" },

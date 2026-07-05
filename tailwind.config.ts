@@ -96,6 +96,11 @@ const config: Config = {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        // JP-OS boot splash progress bar.
+        "boot-progress": {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
+        },
       },
       animation: {
         blink: "blink 1.1s step-end infinite",
@@ -107,6 +112,7 @@ const config: Config = {
         "page-in": "page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both",
         "menu-in": "menu-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both",
         "fade-in": "fade-in 0.2s ease-out both",
+        "boot-progress": "boot-progress 1.5s ease-out both",
       },
     },
   },

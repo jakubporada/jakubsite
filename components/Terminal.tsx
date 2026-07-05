@@ -52,7 +52,15 @@ const BOOT = [
 
 type Line = { text: string; cls?: string };
 
-export function Terminal() {
+export function Terminal({
+  frameless = false,
+  onOpenApp,
+}: {
+  /** Render without the outer chrome/title bar (for JP-OS windows). */
+  frameless?: boolean;
+  /** When inside JP-OS: `open <app>` launches an app window. */
+  onOpenApp?: (app: string) => boolean;
+} = {}) {
   const [lines, setLines] = useState<Line[]>(BOOT.map((b) => ({ text: b.t, cls: b.c })));
   const [input, setInput] = useState("");
   const [path, setPath] = useState<string[]>([]); // [] = home (~)
@@ -102,6 +110,9 @@ export function Terminal() {
           { text: "  pwd             print working directory" },
           { text: "  whoami          who am i" },
           { text: "  open resume     download my resume" },
+          ...(onOpenApp
+            ? [{ text: "  open <app>      launch an app (readme, about, projects, notes, contact)" }]
+            : []),
           { text: "  contact         go to the contact page" },
           { text: "  banner          show the banner" },
           { text: "  clear           clear the screen" },
@@ -161,15 +172,28 @@ export function Terminal() {
         print([{ text: "visitor — but you can hire jakub :)", cls: "text-stone-300" }]);
         break;
 
-      case "open":
-        if (args[0]?.startsWith("resume")) {
+      case "open": {
+        const target = args[0];
+        if (target?.startsWith("resume")) {
           print([{ text: "downloading resume...", cls: "text-burnt" }]);
           const a = document.createElement("a");
           a.href = profile.resume;
           a.download = "";
           a.click();
-        } else print([{ text: `open: usage: open resume`, cls: "text-red-400" }]);
+        } else if (onOpenApp && target && onOpenApp(target)) {
+          print([{ text: `launching ${target}...`, cls: "text-burnt" }]);
+        } else if (onOpenApp) {
+          print([
+            {
+              text: `open: unknown app: ${target ?? ""} — try readme, about, projects, notes, contact, resume`,
+              cls: "text-red-400",
+            },
+          ]);
+        } else {
+          print([{ text: `open: usage: open resume`, cls: "text-red-400" }]);
+        }
         break;
+      }
 
       case "contact":
         print([{ text: "redirecting to /contact ...", cls: "text-burnt" }]);
@@ -246,19 +270,30 @@ export function Terminal() {
 
   return (
     <div
-      className="glow-border overflow-hidden rounded-xl border border-white/10 bg-ink-800/90 font-mono text-sm shadow-2xl"
+      className={
+        frameless
+          ? "flex h-full flex-col font-mono text-sm"
+          : "glow-border overflow-hidden rounded-xl border border-white/10 bg-ink-800/90 font-mono text-sm shadow-2xl"
+      }
       onClick={() => inputRef.current?.focus()}
     >
-      <div className="flex items-center gap-2 border-b border-white/10 bg-ink-700/80 px-4 py-2.5">
-        <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-        <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-        <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-        <span className="ml-3 text-xs text-stone-500">
-          visitor@jakubporada: {cwd} {solved && "· 🚩"}
-        </span>
-      </div>
+      {!frameless && (
+        <div className="flex items-center gap-2 border-b border-white/10 bg-ink-700/80 px-4 py-2.5">
+          <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
+          <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
+          <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
+          <span className="ml-3 text-xs text-stone-500">
+            visitor@jakubporada: {cwd} {solved && "· 🚩"}
+          </span>
+        </div>
+      )}
 
-      <div ref={scrollRef} className="h-[300px] overflow-y-auto p-5">
+      <div
+        ref={scrollRef}
+        className={
+          frameless ? "min-h-0 flex-1 overflow-y-auto p-5" : "h-[300px] overflow-y-auto p-5"
+        }
+      >
         {lines.map((l, i) => (
           <p key={i} className={`whitespace-pre-wrap break-words ${l.cls ?? "text-stone-300"}`}>
             {l.text || " "}

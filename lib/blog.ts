@@ -63,13 +63,6 @@ export function getAllSlugs(): string[] {
   return readPostFiles().map((f) => f.replace(/\.mdx?$/, ""));
 }
 
-export function formatDate(iso: string): string {
-  if (!iso) return "";
-  const d = new Date(iso);
-  if (isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
+// Re-exported so existing server pages keep importing from here;
+// client components should import from "@/lib/format" directly.
+export { formatDate } from "./format";
